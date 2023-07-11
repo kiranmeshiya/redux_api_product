@@ -14,11 +14,10 @@ export default function Product() {
   //  const [status, setStatus] = useState(false);
 
    const dispatch = useDispatch();
-   const { data: products, status } = useSelector((state) => state.product);
+   let { data: products, status } = useSelector((state) => state.product);
 
   useEffect(() => {
-     dispatch(fetchAllProducts());
-  
+      dispatch(fetchAllProducts());  
   },[])
   
   if (status === STATUSES.LOADING) {
@@ -40,7 +39,19 @@ if (status === STATUSES.ERROR) {
         <Row>
             
              {
-                    products.map((data,index) => {
+                    // products.filter((elm) => {
+                    //   if(localStorage.getItem('datasearch') !== null){
+                    //       return elm.category.includes(localStorage.getItem('datasearch'))
+                    //       // return elm.name.includes(search);
+                    //   }
+                    //   else
+                    //   {
+                    //     return elm ;
+                     
+                    //   }
+                    // }).map((data,index) => {
+
+                      products.map((data,index) => {
                       return (
                       
                         <Card style={{ width: '275px' }} key={index} className='card-formate'>
@@ -49,14 +60,16 @@ if (status === STATUSES.ERROR) {
                             <Card.Title>{data.title.slice(0,40)}</Card.Title>
                             <Card.Text>$ {data.price}</Card.Text>
                           </Card.Body>
-                          <Link to={`/singleproduct/${data.id}`}  className='btn btn-danger'>
+                          <Link to={`/singleproduct/${data.id}`}  className='btn btn-danger' >
                             View Product</Link>
                           
                         </Card>
+                   
                       )
                     })
+                   
                }
-             
+           
          
         </Row>
         </Container>

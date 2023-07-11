@@ -9,6 +9,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import axios from 'axios';
+import { searchApi } from '../app/callapi/cartSlice';
 import { fetchProducts } from '../app/callapi/productSlice';
 
 function Headernav() {
@@ -16,6 +17,7 @@ function Headernav() {
   const dispatch = useDispatch()
   const cart = useSelector(state => state.cart)
   const [cat,setCat] = useState ([]);
+ 
 
 const handleCategory = () => 
 {
@@ -34,6 +36,12 @@ const catHandler = (product) => {
   dispatch(fetchProducts(product));
 } 
 
+const handleSearch = (e) => {
+  
+ const data1 = e.target.search.value;
+ dispatch(searchApi(data1))
+  // localStorage.setItem('datasearch',data1);
+}
   return (
     <>
     <Navbar bg="dark" variant="dark" expand="lg">
@@ -47,25 +55,25 @@ const catHandler = (product) => {
             navbarScroll>
             <Link to='/' className='nav-link navbar-brand'>Product</Link>
             <NavDropdown title="Categories" id="basic-nav-dropdown" onClick={handleCategory}>
-              
               {
                 cat.map((item,index) => {
                   return(
                     <NavDropdown.Item key={index} value={item}  onClick={() => catHandler(item)}>{item}</NavDropdown.Item>
                   )
                 })
-              
               }
             </NavDropdown>
           </Nav>
-          <Form className="d-flex me-5">
+          <Form className="d-flex me-5" onSubmit={handleSearch}>
             <Form.Control
               type="search"
               placeholder="Search"
               className="me-2"
               aria-label="Search"
+              name='search'
+            
             />
-            <Button variant="btn btn-danger" >Search</Button>
+            <Button variant="btn btn-danger" type='submit' >Search</Button>
           </Form> 
           <Link to='/cart' className='navbar-brand'><FaShoppingCart/> Cart </Link>
           <Link to='/cart' className='btn btn-danger'>{cart.length}</Link> 

@@ -17,7 +17,7 @@ export default function Singleproduct() {
     useEffect(() =>{
         axios.get(`https://fakestoreapi.com/products/${param.id}`)
         .then(function (response) {
-          console.log(response.data);
+        //   console.log(response.data);
           setSingle(response.data);
            setStatus(true);
       })
@@ -27,8 +27,8 @@ export default function Singleproduct() {
     },[param.id])
 
     const addHandler = (product) => {
-        dispatch(addToCart(product));
-        navigate('/cart')
+         dispatch(addToCart(product));
+         navigate('/cart')
     } 
 
     if(status)

@@ -158,3 +158,13 @@ background-color: rgb(219,53,69);
   margin: auto;
   margin-top: 200px;
 }
+.btn-qty
+{
+  height: 30px!important;
+  width: 30px!important;
+  text-align: center;
+  line-height: 0!important;
+  /* padding-top: 2px!important; */
+  padding: 3px!important;
+  margin: 5px!important;
+}
